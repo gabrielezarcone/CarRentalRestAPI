@@ -21,3 +21,23 @@
 `DELETE` `/users/{id}` _Elimina un utente_
 
 `DELETE` `/users/list` _Elimina utenti da una lista_
+
+## Auto
+
+`POST` `/autos` _Crea una nuova auto_
+
+`POST` `/autos/list` _Crea nuove auto da una lista_
+
+`GET` `/autos/{id}` _Restituisce l'auto con l'id specificato_
+
+`GET` `/autos` _Restituisce la lista di tutti le auto_
+
+`GET` `/autos/count` _Restituisce il numero di auto_
+
+`PUT` `/autos/{id}` _Modifica un'auto_
+
+`DELETE` `/autos` _Elimina tutte le auto_
+
+`DELETE` `/autos/{id}` _Elimina un'auto_
+
+`DELETE` `/autos/list` _Elimina le auto da una lista_
