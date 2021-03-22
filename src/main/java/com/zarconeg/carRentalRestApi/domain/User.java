@@ -29,4 +29,8 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Prenotazione> prenotazioneList;
+
+    @ManyToOne
+    @JoinColumn(name = "ruolo_id")
+    private Ruolo ruolo;
 }
