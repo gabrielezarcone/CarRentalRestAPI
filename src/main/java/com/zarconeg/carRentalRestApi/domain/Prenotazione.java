@@ -1,4 +1,4 @@
-package domain;
+package com.zarconeg.carRentalRestApi.domain;
 
 import lombok.Data;
 
@@ -26,5 +26,6 @@ public class Prenotazione {
 
     private Date fine;
 
+    private Stato stato;
 
 }
