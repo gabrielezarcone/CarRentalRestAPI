@@ -30,7 +30,7 @@
 
 `GET` `/autos/{id}` _Restituisce l'auto con l'id specificato_
 
-`GET` `/autos` _Restituisce la lista di tutti le auto_
+`GET` `/autos` _Restituisce la lista di tutte le auto_
 
 `GET` `/autos/count` _Restituisce il numero di auto_
 
@@ -41,3 +41,23 @@
 `DELETE` `/autos/{id}` _Elimina un'auto_
 
 `DELETE` `/autos/list` _Elimina le auto da una lista_
+
+## Prenotazione
+
+`POST` `/prenotaziones` _Crea una nuova prenotazione_
+
+`POST` `/prenotaziones/list` _Crea nuove prenotazioni da una lista_
+
+`GET` `/prenotaziones/{id}` _Restituisce la prenotazione con l'id specificato_
+
+`GET` `/prenotaziones` _Restituisce la lista di tutte le prenotazione_
+
+`GET` `/prenotaziones/count` _Restituisce il numero di prenotazioni_
+
+`PUT` `/prenotaziones/{id}` _Modifica una prenotazione_
+
+`DELETE` `/prenotaziones` _Elimina tutte le prenotazioni_
+
+`DELETE` `/prenotaziones/{id}` _Elimina una prenotazione_
+
+`DELETE` `/prenotaziones/list` _Elimina le prenotazioni da una lista_
