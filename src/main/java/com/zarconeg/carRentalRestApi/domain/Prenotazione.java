@@ -28,4 +28,12 @@ public class Prenotazione {
 
     private Stato stato;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "auto_id", nullable = false)
+    private Auto auto;
+
 }

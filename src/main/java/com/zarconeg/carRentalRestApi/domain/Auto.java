@@ -22,4 +22,7 @@ public class Auto {
     private String targa;
 
     private String tipologia;
+
+    @OneToMany(mappedBy = "auto")
+    private List<Prenotazione> prenotazioneList;
 }

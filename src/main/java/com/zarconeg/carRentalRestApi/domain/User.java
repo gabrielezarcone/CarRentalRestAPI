@@ -26,4 +26,7 @@ public class User {
     private String password;
 
     private boolean deleted;
+
+    @OneToMany(mappedBy = "user")
+    private List<Prenotazione> prenotazioneList;
 }
