@@ -11,13 +11,25 @@ import java.util.Arrays;
 
 @Component
 public class FakeDataDbSeeder {
+
     @Autowired
     private Environment environment;
 
+    private static final String PROD_PROFILE_NAME = "prod";
+
     private static final Logger LOG = LoggerFactory.getLogger(FakeDataDbSeeder.class);
+
 
     @PostConstruct
     public void seeder(){
-        LOG.warn(Arrays.toString(environment.getActiveProfiles()));
+        String[] profiliAttivi = environment.getActiveProfiles();
+        boolean isProduction = Arrays.stream(profiliAttivi).anyMatch(PROD_PROFILE_NAME::equals);  // anyMatch al posto di List.contais perchè il secondo non funziona con i primitivi
+        if(!isProduction){
+            generateFakeData();
+        }
+    }
+
+    private void generateFakeData() {
+        LOG.warn("genera fake data");
     }
 }
