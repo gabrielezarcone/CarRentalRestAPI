@@ -28,10 +28,12 @@ public class User {
 
     @Email( message = "{Email.User.email.validation}" )
     @NotEmpty( message = "{NotEmpty.User.email.validation}" )
+    @Column(unique = true)
     private String email;
 
     @Size(max = 70, message = "{Size.User.username.validation}")
     @NotEmpty( message = "{NotEmpty.User.username.validation}" )
+    @Column(unique = true)
     private String username;
 
     @Size(min = 8, message = "{Size.User.password.validation}")
