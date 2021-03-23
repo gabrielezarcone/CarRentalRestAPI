@@ -1,5 +1,8 @@
 package com.zarconeg.carRentalRestApi.faker;
 
+import com.github.javafaker.Faker;
+import com.zarconeg.carRentalRestApi.domain.User;
+import com.zarconeg.carRentalRestApi.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
+import java.util.Locale;
 
 @Component
 public class FakeDataDbSeeder {
@@ -18,6 +22,11 @@ public class FakeDataDbSeeder {
     private static final String PROD_PROFILE_NAME = "prod";
 
     private static final Logger LOG = LoggerFactory.getLogger(FakeDataDbSeeder.class);
+
+    @Autowired
+    private UserService userService;
+
+    // -----------------------------------------------------------------------------------------------------------------
 
 
     @PostConstruct
@@ -30,6 +39,26 @@ public class FakeDataDbSeeder {
     }
 
     private void generateFakeData() {
-        LOG.warn("genera fake data");
+        LOG.warn("Geneo fake data");
+
+        Faker faker = new Faker(new Locale("it"));
+
+        generaUsers(faker, 200);
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    private void generaUsers(Faker faker, int number){
+        for (int i=0; i<number; i++){
+            User user = new User();
+            user.setName(faker.name().firstName());
+            user.setSurname(faker.name().lastName());
+            user.setEmail(faker.internet().emailAddress());
+            user.setPassword(faker.internet().password());
+            user.setBirthDate(faker.date().birthday());
+            user.setUsername(faker.name().username());
+            user.setDeleted(faker.bool().bool());
+            userService.save(new User());
+        }
     }
 }
