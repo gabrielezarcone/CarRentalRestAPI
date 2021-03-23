@@ -15,47 +15,47 @@ public class RuoloService {
     @Autowired
     private RuoloRepository repository;
 
-    <S extends Ruolo> S save(S ruolo){
+    public <S extends Ruolo> S save(S ruolo){
         return repository.save(ruolo);
     }
 
-    <S extends Ruolo> Iterable<S> saveAll(Iterable<S> ruoloList){
+    public <S extends Ruolo> Iterable<S> saveAll(Iterable<S> ruoloList){
         return repository.saveAll(ruoloList);
     }
 
-    Optional<Ruolo> findById(Long id){
+    public Optional<Ruolo> findById(Long id){
         return repository.findById(id);
     }
 
-    boolean existsById(Long id){
+    public boolean existsById(Long id){
         return repository.existsById(id);
     }
 
-    Iterable<Ruolo> findAll(){
+    public Iterable<Ruolo> findAll(){
         return repository.findAll();
     }
 
-    Iterable<Ruolo> findAllById(Iterable<Long> idList){
+    public Iterable<Ruolo> findAllById(Iterable<Long> idList){
         return repository.findAllById(idList);
     }
 
-    long count(){
+    public long count(){
         return repository.count();
     }
 
-    void deleteById(Long id){
+    public void deleteById(Long id){
         repository.deleteById(id);
     }
 
-    void delete(Ruolo ruolo){
+    public void delete(Ruolo ruolo){
         repository.delete(ruolo);
     }
 
-    void deleteAll(Iterable<? extends Ruolo> ruoloList){
+    public void deleteAll(Iterable<? extends Ruolo> ruoloList){
         repository.deleteAll(ruoloList);
     }
 
-    void deleteAll(){
+    public void deleteAll(){
         repository.deleteAll();
     }
 
