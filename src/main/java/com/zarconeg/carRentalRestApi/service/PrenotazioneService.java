@@ -4,10 +4,12 @@ import com.zarconeg.carRentalRestApi.domain.Prenotazione;
 import com.zarconeg.carRentalRestApi.repository.PrenotazioneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
+@Transactional
 public class PrenotazioneService {
 
     @Autowired
