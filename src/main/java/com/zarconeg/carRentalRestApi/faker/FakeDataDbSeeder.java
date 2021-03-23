@@ -6,6 +6,10 @@ import com.zarconeg.carRentalRestApi.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +18,7 @@ import java.util.Arrays;
 import java.util.Locale;
 
 @Component
-public class FakeDataDbSeeder {
+public class FakeDataDbSeeder implements ApplicationRunner {
 
     @Autowired
     private Environment environment;
@@ -29,8 +33,8 @@ public class FakeDataDbSeeder {
     // -----------------------------------------------------------------------------------------------------------------
 
 
-    @PostConstruct
-    public void seeder(){
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
         String[] profiliAttivi = environment.getActiveProfiles();
         boolean isProduction = Arrays.stream(profiliAttivi).anyMatch(PROD_PROFILE_NAME::equals);  // anyMatch al posto di List.contais perchè il secondo non funziona con i primitivi
         if(!isProduction){
@@ -39,7 +43,7 @@ public class FakeDataDbSeeder {
     }
 
     private void generateFakeData() {
-        LOG.warn("Geneo fake data");
+        LOG.warn("Genero fake data");
 
         Faker faker = new Faker(new Locale("it"));
 
