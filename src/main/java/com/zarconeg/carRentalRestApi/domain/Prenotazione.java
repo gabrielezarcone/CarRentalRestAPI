@@ -40,12 +40,12 @@ public class Prenotazione {
     // -------------------------------------------------------------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonBackReference
+    @JsonBackReference(value = "user_prenotazione")
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "auto_id", nullable = false)
-    @JsonBackReference
+    @JsonBackReference(value = "auto_prenotazione")
     private Auto auto;
 
 }

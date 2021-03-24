@@ -55,7 +55,7 @@ public class User {
     // RELAZIONI
     // -------------------------------------------------------------------------------------------------------------
     @OneToMany(mappedBy = "user")
-    @JsonManagedReference
+    @JsonManagedReference(value = "user_prenotazione")
     private List<Prenotazione> prenotazioneList;
 
     @ManyToOne

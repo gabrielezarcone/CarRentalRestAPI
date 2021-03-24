@@ -43,6 +43,6 @@ public class Auto {
     // -------------------------------------------------------------------------------------------------------------
     @JsonBackReference
     @OneToMany(mappedBy = "auto")
-    @JsonManagedReference
+    @JsonManagedReference(value = "auto_prenotazione")
     private List<Prenotazione> prenotazioneList;
 }
