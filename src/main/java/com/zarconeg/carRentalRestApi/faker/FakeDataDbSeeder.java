@@ -46,7 +46,7 @@ public class FakeDataDbSeeder implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         String[] profiliAttivi = environment.getActiveProfiles();
         boolean isProduction = Arrays.stream(profiliAttivi).anyMatch(PROD_PROFILE_NAME::equals);  // anyMatch al posto di List.contais perchè il secondo non funziona con i primitivi
-        if(isProduction){
+        if(!isProduction){
             generateFakeData();
         }
     }
