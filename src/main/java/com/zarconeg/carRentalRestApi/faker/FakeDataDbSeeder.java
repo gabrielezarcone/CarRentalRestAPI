@@ -2,8 +2,10 @@ package com.zarconeg.carRentalRestApi.faker;
 
 import com.github.javafaker.Faker;
 import com.zarconeg.carRentalRestApi.domain.Auto;
+import com.zarconeg.carRentalRestApi.domain.Ruolo;
 import com.zarconeg.carRentalRestApi.domain.User;
 import com.zarconeg.carRentalRestApi.service.AutoService;
+import com.zarconeg.carRentalRestApi.service.RuoloService;
 import com.zarconeg.carRentalRestApi.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +33,7 @@ public class FakeDataDbSeeder implements ApplicationRunner {
 
     @Autowired private UserService userService;
     @Autowired private AutoService autoService;
+    @Autowired private RuoloService ruoloService;
 
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -39,7 +42,7 @@ public class FakeDataDbSeeder implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         String[] profiliAttivi = environment.getActiveProfiles();
         boolean isProduction = Arrays.stream(profiliAttivi).anyMatch(PROD_PROFILE_NAME::equals);  // anyMatch al posto di List.contais perchè il secondo non funziona con i primitivi
-        if(!isProduction){
+        if(isProduction){
             generateFakeData();
         }
     }
@@ -51,6 +54,7 @@ public class FakeDataDbSeeder implements ApplicationRunner {
 
         generaUsers(faker, 200);
         generaAuto(faker, 50);
+        generaRuoli();
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -79,5 +83,14 @@ public class FakeDataDbSeeder implements ApplicationRunner {
             auto.setTipologia(faker.superhero().descriptor());
             autoService.save(auto);
         }
+    }
+
+    private void generaRuoli(){
+        Ruolo admin = new Ruolo();
+        admin.setRuolo("ROLE_ADMIN");
+        Ruolo customer = new Ruolo();
+        customer.setRuolo("ROLE_CUSTOMER");
+        ruoloService.save(admin);
+        ruoloService.save(customer);
     }
 }
