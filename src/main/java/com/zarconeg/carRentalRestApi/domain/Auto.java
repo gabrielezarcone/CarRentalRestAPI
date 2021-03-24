@@ -1,5 +1,7 @@
 package com.zarconeg.carRentalRestApi.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -36,6 +38,11 @@ public class Auto {
 
     private String tipologia;
 
+    // -------------------------------------------------------------------------------------------------------------
+    // RELAZIONI
+    // -------------------------------------------------------------------------------------------------------------
+    @JsonBackReference
     @OneToMany(mappedBy = "auto")
+    @JsonManagedReference
     private List<Prenotazione> prenotazioneList;
 }

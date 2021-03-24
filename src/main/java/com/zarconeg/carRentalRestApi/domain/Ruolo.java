@@ -1,5 +1,6 @@
 package com.zarconeg.carRentalRestApi.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -22,6 +23,10 @@ public class Ruolo {
 
     private String ruolo;
 
+    // -------------------------------------------------------------------------------------------------------------
+    // RELAZIONI
+    // -------------------------------------------------------------------------------------------------------------
     @OneToMany(mappedBy = "ruolo")
+    @JsonManagedReference
     private List<User> users;
 }

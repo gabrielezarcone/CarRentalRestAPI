@@ -1,5 +1,7 @@
 package com.zarconeg.carRentalRestApi.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -49,10 +51,15 @@ public class User {
 
     private boolean deleted = false;
 
+    // -------------------------------------------------------------------------------------------------------------
+    // RELAZIONI
+    // -------------------------------------------------------------------------------------------------------------
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference
     private List<Prenotazione> prenotazioneList;
 
     @ManyToOne
     @JoinColumn(name = "ruolo_id")
+    @JsonBackReference
     private Ruolo ruolo;
 }
