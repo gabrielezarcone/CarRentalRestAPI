@@ -37,6 +37,7 @@ public class FakeDataDbSeeder implements ApplicationRunner {
 
     private final HashMap<Integer, User> users = new HashMap<>();
     private final HashMap<Integer, Auto> cars = new HashMap<>();
+    private final HashMap<Integer, Ruolo> roles = new HashMap<>();
 
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -55,9 +56,9 @@ public class FakeDataDbSeeder implements ApplicationRunner {
 
         Faker faker = new Faker(new Locale("it"));
 
+        generaRuoli();
         generaUsers(faker, 200);
         generaAuto(faker, 50);
-        generaRuoli();
         generaPrenotazioni(faker, 300);
     }
 
@@ -73,6 +74,7 @@ public class FakeDataDbSeeder implements ApplicationRunner {
             user.setBirthDate(faker.date().birthday());
             user.setUsername(faker.name().username()+faker.numerify("##"));
             user.setDeleted(faker.bool().bool());
+            user.setRuolo(this.roles.get(faker.number().numberBetween(0, this.roles.size())));
             userService.save(user);
             this.users.put(i, user);
         }
@@ -98,6 +100,8 @@ public class FakeDataDbSeeder implements ApplicationRunner {
         customer.setRuolo("ROLE_CUSTOMER");
         ruoloService.save(admin);
         ruoloService.save(customer);
+        this.roles.put(0, admin);
+        this.roles.put(1, customer);
     }
 
     private void generaPrenotazioni(Faker faker, int number){
