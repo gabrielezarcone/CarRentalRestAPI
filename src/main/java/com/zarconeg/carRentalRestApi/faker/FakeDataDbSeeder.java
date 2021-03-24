@@ -62,7 +62,7 @@ public class FakeDataDbSeeder implements ApplicationRunner {
             user.setBirthDate(faker.date().birthday());
             user.setUsername(faker.name().username());
             user.setDeleted(faker.bool().bool());
-            userService.save(new User());
+            userService.save(user);
         }
     }
 }
