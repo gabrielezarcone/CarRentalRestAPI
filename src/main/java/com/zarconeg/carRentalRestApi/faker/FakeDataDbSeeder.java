@@ -1,7 +1,9 @@
 package com.zarconeg.carRentalRestApi.faker;
 
 import com.github.javafaker.Faker;
+import com.zarconeg.carRentalRestApi.domain.Auto;
 import com.zarconeg.carRentalRestApi.domain.User;
+import com.zarconeg.carRentalRestApi.service.AutoService;
 import com.zarconeg.carRentalRestApi.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,8 +29,8 @@ public class FakeDataDbSeeder implements ApplicationRunner {
 
     private static final Logger LOG = LoggerFactory.getLogger(FakeDataDbSeeder.class);
 
-    @Autowired
-    private UserService userService;
+    @Autowired private UserService userService;
+    @Autowired private AutoService autoService;
 
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -48,6 +50,7 @@ public class FakeDataDbSeeder implements ApplicationRunner {
         Faker faker = new Faker(new Locale("it"));
 
         generaUsers(faker, 200);
+        generaAuto(faker, 50);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -63,6 +66,18 @@ public class FakeDataDbSeeder implements ApplicationRunner {
             user.setUsername(faker.name().username());
             user.setDeleted(faker.bool().bool());
             userService.save(user);
+        }
+    }
+
+    private void generaAuto(Faker faker, int number){
+        for (int i=0; i<number; i++){
+            Auto auto = new Auto();
+            auto.setCostruttore(faker.superhero().prefix());
+            auto.setModello(faker.superhero().power());
+            auto.setImmatricolazione(faker.date().birthday());
+            auto.setTarga(faker.idNumber().valid());
+            auto.setTipologia(faker.superhero().descriptor());
+            autoService.save(auto);
         }
     }
 }
