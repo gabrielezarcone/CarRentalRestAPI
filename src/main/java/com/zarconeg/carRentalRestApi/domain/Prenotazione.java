@@ -3,10 +3,7 @@ package com.zarconeg.carRentalRestApi.domain;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.Future;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Past;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 
@@ -27,11 +24,11 @@ public class Prenotazione {
     private long id;
 
     @FutureOrPresent( message = "{FutureOrPresent.Prenotazione.inizio.validation}" )
-    @NotEmpty( message = "{NotEmpty.Prenotazione.inizio.validation}" )
+    @NotNull( message = "{NotNull.Prenotazione.inizio.validation}" )
     private Date inizio;
 
     @FutureOrPresent( message = "{FutureOrPresent.Prenotazione.fine.validation}" )
-    @NotEmpty( message = "{NotEmpty.Prenotazione.fine.validation}" )
+    @NotNull( message = "{NotNull.Prenotazione.fine.validation}" )
     private Date fine;
 
     private Stato stato = Stato.PENDING;

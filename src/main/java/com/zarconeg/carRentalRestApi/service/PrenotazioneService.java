@@ -15,47 +15,47 @@ public class PrenotazioneService {
     @Autowired
     private PrenotazioneRepository repository;
 
-    <S extends Prenotazione> S save(S prenotazione){
+    public <S extends Prenotazione> S save(S prenotazione){
         return repository.save(prenotazione);
     }
 
-    <S extends Prenotazione> Iterable<S> saveAll(Iterable<S> prenotazioneList){
+    public <S extends Prenotazione> Iterable<S> saveAll(Iterable<S> prenotazioneList){
         return repository.saveAll(prenotazioneList);
     }
 
-    Optional<Prenotazione> findById(Long id){
+    public Optional<Prenotazione> findById(Long id){
         return repository.findById(id);
     }
 
-    boolean existsById(Long id){
+    public boolean existsById(Long id){
         return repository.existsById(id);
     }
 
-    Iterable<Prenotazione> findAll(){
+    public Iterable<Prenotazione> findAll(){
         return repository.findAll();
     }
 
-    Iterable<Prenotazione> findAllById(Iterable<Long> idList){
+    public Iterable<Prenotazione> findAllById(Iterable<Long> idList){
         return repository.findAllById(idList);
     }
 
-    long count(){
+    public long count(){
         return repository.count();
     }
 
-    void deleteById(Long id){
+    public void deleteById(Long id){
         repository.deleteById(id);
     }
 
-    void delete(Prenotazione prenotazione){
+    public void delete(Prenotazione prenotazione){
         repository.delete(prenotazione);
     }
 
-    void deleteAll(Iterable<? extends Prenotazione> prenotazioneList){
+    public void deleteAll(Iterable<? extends Prenotazione> prenotazioneList){
         repository.deleteAll(prenotazioneList);
     }
 
-    void deleteAll(){
+    public void deleteAll(){
         repository.deleteAll();
     }
 

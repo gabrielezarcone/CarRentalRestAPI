@@ -16,47 +16,47 @@ public class AutoService {
     @Autowired
     private AutoRepository repository;
 
-    <S extends Auto> S save(S auto){
+    public <S extends Auto> S save(S auto){
         return repository.save(auto);
     }
 
-    <S extends Auto> Iterable<S> saveAll(Iterable<S> autos){
+    public <S extends Auto> Iterable<S> saveAll(Iterable<S> autos){
         return repository.saveAll(autos);
     }
 
-    Optional<Auto> findById(Long id){
+    public Optional<Auto> findById(Long id){
         return repository.findById(id);
     }
 
-    boolean existsById(Long id){
+    public boolean existsById(Long id){
         return repository.existsById(id);
     }
 
-    Iterable<Auto> findAll(){
+    public Iterable<Auto> findAll(){
         return repository.findAll();
     }
 
-    Iterable<Auto> findAllById(Iterable<Long> idList){
+    public Iterable<Auto> findAllById(Iterable<Long> idList){
         return repository.findAllById(idList);
     }
 
-    long count(){
+    public long count(){
         return repository.count();
     }
 
-    void deleteById(Long id){
+    public void deleteById(Long id){
         repository.deleteById(id);
     }
 
-    void delete(Auto auto){
+    public void delete(Auto auto){
         repository.delete(auto);
     }
 
-    void deleteAll(Iterable<? extends Auto> autos){
+    public void deleteAll(Iterable<? extends Auto> autos){
         repository.deleteAll(autos);
     }
 
-    void deleteAll(){
+    public void deleteAll(){
         repository.deleteAll();
     }
 
