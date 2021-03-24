@@ -2,9 +2,11 @@ package com.zarconeg.carRentalRestApi.faker;
 
 import com.github.javafaker.Faker;
 import com.zarconeg.carRentalRestApi.domain.Auto;
+import com.zarconeg.carRentalRestApi.domain.Prenotazione;
 import com.zarconeg.carRentalRestApi.domain.Ruolo;
 import com.zarconeg.carRentalRestApi.domain.User;
 import com.zarconeg.carRentalRestApi.service.AutoService;
+import com.zarconeg.carRentalRestApi.service.PrenotazioneService;
 import com.zarconeg.carRentalRestApi.service.RuoloService;
 import com.zarconeg.carRentalRestApi.service.UserService;
 import org.slf4j.Logger;
@@ -12,14 +14,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.util.Arrays;
-import java.util.Locale;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class FakeDataDbSeeder implements ApplicationRunner {
@@ -34,6 +33,10 @@ public class FakeDataDbSeeder implements ApplicationRunner {
     @Autowired private UserService userService;
     @Autowired private AutoService autoService;
     @Autowired private RuoloService ruoloService;
+    @Autowired private PrenotazioneService prenotazioneService;
+
+    private final HashMap<Integer, User> users = new HashMap<>();
+    private final HashMap<Integer, Auto> cars = new HashMap<>();
 
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -55,6 +58,7 @@ public class FakeDataDbSeeder implements ApplicationRunner {
         generaUsers(faker, 200);
         generaAuto(faker, 50);
         generaRuoli();
+        generaPrenotazioni(faker, 300);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -67,9 +71,10 @@ public class FakeDataDbSeeder implements ApplicationRunner {
             user.setEmail(faker.internet().emailAddress());
             user.setPassword(faker.internet().password());
             user.setBirthDate(faker.date().birthday());
-            user.setUsername(faker.name().username());
+            user.setUsername(faker.name().username()+faker.numerify("##"));
             user.setDeleted(faker.bool().bool());
             userService.save(user);
+            this.users.put(i, user);
         }
     }
 
@@ -82,6 +87,7 @@ public class FakeDataDbSeeder implements ApplicationRunner {
             auto.setTarga(faker.idNumber().valid());
             auto.setTipologia(faker.superhero().descriptor());
             autoService.save(auto);
+            this.cars.put(i, auto);
         }
     }
 
@@ -92,5 +98,31 @@ public class FakeDataDbSeeder implements ApplicationRunner {
         customer.setRuolo("ROLE_CUSTOMER");
         ruoloService.save(admin);
         ruoloService.save(customer);
+    }
+
+    private void generaPrenotazioni(Faker faker, int number){
+        for (int i=0; i<number; i++){
+            // --------------------------------------------------------------------
+            Date inizio = faker.date().future(100, 2, TimeUnit.DAYS);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(inizio);
+            calendar.add(Calendar.DATE, faker.number().numberBetween(0,30));
+            Date fine = calendar.getTime();
+            // --------------------------------------------------------------------
+            Prenotazione prenotazione = new Prenotazione();
+            prenotazione.setInizio(inizio);
+            prenotazione.setFine(fine);
+            List<Prenotazione.Stato> stati = new ArrayList<>();
+            // --------------------------------------------------------------------
+            stati.add(Prenotazione.Stato.PENDING);
+            stati.add(Prenotazione.Stato.APPROVATO);
+            stati.add(Prenotazione.Stato.RIFIUTATO);
+            prenotazione.setStato(faker.options().nextElement(stati));
+            // --------------------------------------------------------------------
+            prenotazione.setAuto(this.cars.get(faker.number().numberBetween(0, this.cars.size())));
+            prenotazione.setUser(this.users.get(faker.number().numberBetween(0, this.users.size())));
+            // --------------------------------------------------------------------
+            prenotazioneService.save(prenotazione);
+        }
     }
 }
