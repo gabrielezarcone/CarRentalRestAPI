@@ -1,4 +1,4 @@
-package com.zarconeg.carRentalRestApi.exception;
+package com.zarconeg.carRentalRestApi.exception.user;
 
 import lombok.Getter;
 import lombok.Setter;

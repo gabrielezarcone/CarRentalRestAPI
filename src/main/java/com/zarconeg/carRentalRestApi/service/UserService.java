@@ -22,7 +22,7 @@ public class UserService{
         return repository.saveAll(users);
     }
 
-    Optional<User> findById(Long id){
+    public Optional<User> findById(Long id){
         return repository.findById(id);
     }
 

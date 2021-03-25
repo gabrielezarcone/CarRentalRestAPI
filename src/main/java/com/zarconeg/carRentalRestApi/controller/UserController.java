@@ -1,7 +1,8 @@
 package com.zarconeg.carRentalRestApi.controller;
 
 import com.zarconeg.carRentalRestApi.domain.User;
-import com.zarconeg.carRentalRestApi.exception.UserIntegrityException;
+import com.zarconeg.carRentalRestApi.exception.user.UserIntegrityException;
+import com.zarconeg.carRentalRestApi.exception.user.UserNotFoundException;
 import com.zarconeg.carRentalRestApi.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
@@ -35,6 +37,21 @@ public class UserController {
         }
         LOG.info("Mostro la lista degli utenti");
         return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    // GET /api/user/{id}
+    // Restituisce un utente dato un id
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable long id) throws UserNotFoundException{
+        LOG.info("Recupero utente con id: {}", id);
+        Optional<User> user = userService.findById(id);
+        if (user.isPresent()){
+            LOG.info("Invio utente {}", user.get());
+            return new ResponseEntity<>(user.get(), HttpStatus.OK);
+        }
+        else {
+            throw new UserNotFoundException("Utente non trovato");
+        }
     }
 
      // POST /api/user
