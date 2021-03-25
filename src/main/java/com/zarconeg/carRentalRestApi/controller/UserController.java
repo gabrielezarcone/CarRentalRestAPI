@@ -112,4 +112,13 @@ public class UserController {
         userService.deleteAll();
         return new ResponseEntity<>("Eliminati tutti gli utenti",HttpStatus.OK);
     }
+
+    // GET /api/user/count/
+    // Ritorna il numero di tutti gli utenti
+    @GetMapping(value = "/count/")
+    public ResponseEntity<Long> countUsers() {
+        LOG.warn("Conto gli utenti");
+        long count = userService.count();
+        return new ResponseEntity<>(count ,HttpStatus.OK);
+    }
 }
