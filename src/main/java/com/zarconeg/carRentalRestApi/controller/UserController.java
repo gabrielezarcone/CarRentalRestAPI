@@ -103,4 +103,13 @@ public class UserController {
             throw new UserNotFoundException();
         }
     }
+
+    // DELETE /api/user/
+    // Cancella tutti gli utenti
+    @DeleteMapping(value = "/")
+    public ResponseEntity<String> deleteUsers() {
+        LOG.warn("Elimino  tutti gli utenti");
+        userService.deleteAll();
+        return new ResponseEntity<>("Eliminati tutti gli utenti",HttpStatus.OK);
+    }
 }
