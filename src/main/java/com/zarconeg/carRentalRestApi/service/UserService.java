@@ -1,58 +1,85 @@
 package com.zarconeg.carRentalRestApi.service;
 
 import com.zarconeg.carRentalRestApi.domain.User;
+import com.zarconeg.carRentalRestApi.exception.user.UserNotFoundException;
 import com.zarconeg.carRentalRestApi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserService{
     
     @Autowired private UserRepository repository;
 
-    <S extends User> S save(S user){
+    public <S extends User> S save(S user){
         return repository.save(user);
     }
 
-    <S extends User> Iterable<S> saveAll(Iterable<S> users){
+    public void update(long id, User updatedUser) throws UserNotFoundException {
+        Optional<User> userOptional = findById(id);
+        if (userOptional.isPresent()){
+            User user = userOptional.get();
+            user.setUsername(updatedUser.getUsername());
+            user.setName(updatedUser.getName());
+            user.setSurname(updatedUser.getSurname());
+            user.setPassword(updatedUser.getPassword());
+            user.setEmail(updatedUser.getEmail());
+            user.setBirthDate(updatedUser.getBirthDate());
+            user.setDeleted(updatedUser.isDeleted());
+            user.setRuolo(updatedUser.getRuolo());
+            user.setPrenotazioneList(updatedUser.getPrenotazioneList());
+        }
+        else {
+            throw new UserNotFoundException();
+        }
+    }
+
+    public <S extends User> Iterable<S> saveAll(Iterable<S> users){
         return repository.saveAll(users);
     }
 
-    Optional<User> findById(Long id){
+    public Optional<User> findById(Long id){
         return repository.findById(id);
     }
 
-    boolean existsById(Long id){
+    public boolean existsById(Long id){
         return repository.existsById(id);
     }
 
-    Iterable<User> findAll(){
+    public Iterable<User> findAll(){
         return repository.findAll();
     }
 
-    Iterable<User> findAllById(Iterable<Long> idList){
+    public Iterable<User> findAllById(Iterable<Long> idList){
         return repository.findAllById(idList);
     }
 
-    long count(){
+    public long count(){
         return repository.count();
     }
 
-    void deleteById(Long id){
+    public void deleteById(Long id){
         repository.deleteById(id);
     }
 
-    void delete(User user){
+    public void delete(User user){
         repository.delete(user);
     }
 
-    void deleteAll(Iterable<? extends User> users){
+    public void deleteAll(Iterable<? extends User> users){
         repository.deleteAll(users);
     }
 
-    void deleteAll(){
+    public void deleteAll(){
         repository.deleteAll();
     }
 
