@@ -5,11 +5,10 @@ import com.zarconeg.carRentalRestApi.exception.RestCustomException;
 public class UserNotFoundException extends RestCustomException {
 
     public UserNotFoundException(){
-        super();
+        super("Utente non trovato");
     }
 
     public UserNotFoundException(String errorMessage){
         super(errorMessage);
-        this.errorMessage = errorMessage;
     }
 }

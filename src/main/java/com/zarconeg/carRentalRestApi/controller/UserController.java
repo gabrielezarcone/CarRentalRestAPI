@@ -50,7 +50,7 @@ public class UserController {
             return new ResponseEntity<>(user.get(), HttpStatus.OK);
         }
         else {
-            throw new UserNotFoundException("Utente non trovato");
+            throw new UserNotFoundException();
         }
     }
 
