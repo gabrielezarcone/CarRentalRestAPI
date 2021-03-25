@@ -1,19 +1,13 @@
 package com.zarconeg.carRentalRestApi.exception.user;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.zarconeg.carRentalRestApi.exception.RestCustomException;
 
-@Getter
-@Setter
-public class UserIntegrityException extends Exception{
-
-    private String message = "Si è verificato un problema di integrità dei dati dell'utente";
+public class UserIntegrityException extends RestCustomException {
 
     public UserIntegrityException(){
-        super();
+        super("Si è verificato un problema di integrità dei dati dell'utente");
     }
     public UserIntegrityException(String message){
         super(message);
-        this.message = message;
     }
 }
