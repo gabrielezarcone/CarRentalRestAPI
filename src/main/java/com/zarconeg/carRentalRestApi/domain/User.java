@@ -1,6 +1,10 @@
 package com.zarconeg.carRentalRestApi.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -12,6 +16,11 @@ import java.util.List;
 
 @Entity
 @Data
+// Tolgo il campo prenotazionList per evitarte la generazione ciclica e ricorsiva dei metodi toString, HashCode e equals
+// https://github.com/rzwitserloot/lombok/issues/2255
+// https://stackoverflow.com/questions/40266770/spring-jpa-bi-directional-cannot-evaluate-tostring/40267032
+@ToString(exclude = "prenotazioneList")
+@EqualsAndHashCode(exclude = "prenotazioneList")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,10 +51,15 @@ public class User {
 
     private boolean deleted = false;
 
-    @OneToMany(mappedBy = "user")
+    // -------------------------------------------------------------------------------------------------------------
+    // RELAZIONI
+    // -------------------------------------------------------------------------------------------------------------
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "user_prenotazione")
     private List<Prenotazione> prenotazioneList;
 
     @ManyToOne
     @JoinColumn(name = "ruolo_id")
+    @JsonBackReference
     private Ruolo ruolo;
 }

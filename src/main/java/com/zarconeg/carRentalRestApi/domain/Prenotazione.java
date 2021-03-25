@@ -1,5 +1,7 @@
 package com.zarconeg.carRentalRestApi.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -33,12 +35,17 @@ public class Prenotazione {
 
     private Stato stato = Stato.PENDING;
 
+    // -------------------------------------------------------------------------------------------------------------
+    // RELAZIONI
+    // -------------------------------------------------------------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference(value = "user_prenotazione")
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "auto_id", nullable = false)
+    @JsonBackReference(value = "auto_prenotazione")
     private Auto auto;
 
 }
