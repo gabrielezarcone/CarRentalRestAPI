@@ -42,7 +42,7 @@ public class Auto {
     // RELAZIONI
     // -------------------------------------------------------------------------------------------------------------
     @JsonBackReference
-    @OneToMany(mappedBy = "auto")
+    @OneToMany(mappedBy = "auto", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "auto_prenotazione")
     private List<Prenotazione> prenotazioneList;
 }

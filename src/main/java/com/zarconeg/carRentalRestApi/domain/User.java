@@ -54,7 +54,7 @@ public class User {
     // -------------------------------------------------------------------------------------------------------------
     // RELAZIONI
     // -------------------------------------------------------------------------------------------------------------
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "user_prenotazione")
     private List<Prenotazione> prenotazioneList;
 

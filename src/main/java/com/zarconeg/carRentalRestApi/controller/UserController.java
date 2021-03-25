@@ -78,7 +78,7 @@ public class UserController {
             @RequestBody User updatedUser,
             UriComponentsBuilder ucBuilder
     ) throws UserNotFoundException {
-        LOG.info("Recupero user con id: {}", id);
+        LOG.info("Recupero user con id: {} per aggiornarlo", id);
         userService.update(id, updatedUser);
         LOG.info("Aggiornato user: {}", updatedUser);
         // --------------------------
@@ -86,5 +86,21 @@ public class UserController {
         headers.setLocation(ucBuilder.path("/api/user/{id}").buildAndExpand(updatedUser.getId()).toUri());
         // --------------------------
         return new ResponseEntity<>(headers, HttpStatus.OK);
+    }
+
+    // DELETE /api/user/{id}
+    // Cancella un utente in base all'id
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> deleteUserById(@PathVariable long id) throws UserNotFoundException {
+        LOG.info("Recupero user con id: {} per eliminazione", id);
+        Optional<User> user = userService.findById(id);
+        if (user.isPresent()){
+            LOG.info("Elimino  user: {}", user.get());
+            userService.delete(user.get());
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        else {
+            throw new UserNotFoundException();
+        }
     }
 }
