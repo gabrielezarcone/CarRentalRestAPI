@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,5 +68,23 @@ public class UserController {
         }
         headers.setLocation(ucBuilder.path("/api/user/{id}").buildAndExpand(newUser.getId()).toUri());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+    }
+
+    // PUT /api/user/{id}
+    // Aggiorna l'utente sostituendo tutte le informazioni con quelle dell'utente ricevuto
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<String> updateUser(
+            @PathVariable long id,
+            @RequestBody User updatedUser,
+            UriComponentsBuilder ucBuilder
+    ) throws UserNotFoundException {
+        LOG.info("Recupero user con id: {}", id);
+        userService.update(id, updatedUser);
+        LOG.info("Aggiornato user: {}", updatedUser);
+        // --------------------------
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/api/user/{id}").buildAndExpand(updatedUser.getId()).toUri());
+        // --------------------------
+        return new ResponseEntity<>(headers, HttpStatus.OK);
     }
 }
