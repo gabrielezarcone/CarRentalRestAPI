@@ -49,23 +49,23 @@
 ## Prenotazione
 #### _TO DO_
 
-`POST` `/prenotaziones` _Crea una nuova prenotazione_
+`POST` `/prenotazione` _Crea una nuova prenotazione_
 
-`POST` `/prenotaziones/list` _Crea nuove prenotazioni da una lista_
+`POST` `/prenotazione/list` _Crea nuove prenotazioni da una lista_
 
-`GET` `/prenotaziones/{id}` _Restituisce la prenotazione con l'id specificato_
+`GET` `/prenotazione/{id}` _Restituisce la prenotazione con l'id specificato_
 
-`GET` `/prenotaziones` _Restituisce la lista di tutte le prenotazioni_
+`GET` `/prenotazione` _Restituisce la lista di tutte le prenotazioni_
 
-`GET` `/prenotaziones/count` _Restituisce il numero di prenotazioni_
+`GET` `/prenotazione/count` _Restituisce il numero di prenotazioni_
 
-`PUT` `/prenotaziones/{id}` _Modifica una prenotazione_
+`PUT` `/prenotazione/{id}` _Modifica una prenotazione_
 
-`DELETE` `/prenotaziones` _Elimina tutte le prenotazioni_
+`DELETE` `/prenotazione` _Elimina tutte le prenotazioni_
 
-`DELETE` `/prenotaziones/{id}` _Elimina una prenotazione_
+`DELETE` `/prenotazione/{id}` _Elimina una prenotazione_
 
-`DELETE` `/prenotaziones/list` _Elimina le prenotazioni da una lista_
+`DELETE` `/prenotazione/list` _Elimina le prenotazioni da una lista_
 
 ## Ruolo  
 
