@@ -111,4 +111,13 @@ public class AutoController {
         autoService.deleteAll();
         return new ResponseEntity<>("Eliminati tutte le auto",HttpStatus.OK);
     }
+
+    // GET /api/auto/count/
+    // Ritorna il numero di tutte le auto
+    @GetMapping(value = "/count/")
+    public ResponseEntity<Long> countCars() {
+        LOG.warn("Conto le auto");
+        long count = autoService.count();
+        return new ResponseEntity<>(count ,HttpStatus.OK);
+    }
 }
