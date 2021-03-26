@@ -1,7 +1,7 @@
 package com.zarconeg.carRentalRestApi.service;
 
 import com.zarconeg.carRentalRestApi.domain.Auto;
-import com.zarconeg.carRentalRestApi.repository.AutoRepository;
+import com.zarconeg.carRentalRestApi.exception.auto.AutoNotFoundException;
 import com.zarconeg.carRentalRestApi.repository.AutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,23 @@ public class AutoService {
 
     @Autowired
     private AutoRepository repository;
+    
+
+    public void update(long id, Auto updatedAuto) throws AutoNotFoundException {
+        Optional<Auto> autoOptional = findById(id);
+        if (autoOptional.isPresent()){
+            Auto auto = autoOptional.get();
+            auto.setCostruttore(updatedAuto.getCostruttore());
+            auto.setModello(updatedAuto.getModello());
+            auto.setTarga(updatedAuto.getTarga());
+            auto.setTipologia(updatedAuto.getTipologia());
+            auto.setImmatricolazione(updatedAuto.getImmatricolazione());
+            auto.setPrenotazioneList(updatedAuto.getPrenotazioneList());
+        }
+        else {
+            throw new AutoNotFoundException();
+        }
+    }
 
     public <S extends Auto> S save(S auto){
         return repository.save(auto);
@@ -59,5 +76,4 @@ public class AutoService {
     public void deleteAll(){
         repository.deleteAll();
     }
-
 }

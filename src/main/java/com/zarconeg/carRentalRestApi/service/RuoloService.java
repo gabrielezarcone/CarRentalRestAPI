@@ -1,6 +1,8 @@
 package com.zarconeg.carRentalRestApi.service;
 
 import com.zarconeg.carRentalRestApi.domain.Ruolo;
+import com.zarconeg.carRentalRestApi.domain.Ruolo;
+import com.zarconeg.carRentalRestApi.exception.ruolo.RuoloNotFoundException;
 import com.zarconeg.carRentalRestApi.repository.RuoloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,20 @@ public class RuoloService {
 
     @Autowired
     private RuoloRepository repository;
+    
+
+    public void update(long id, Ruolo updatedRuolo) throws RuoloNotFoundException {
+        Optional<Ruolo> ruoloOptional = findById(id);
+        if (ruoloOptional.isPresent()){
+            Ruolo ruolo = ruoloOptional.get();
+            ruolo.setRuolo(updatedRuolo.getRuolo());
+            ruolo.setUsers(updatedRuolo.getUsers());
+        }
+        else {
+            throw new RuoloNotFoundException();
+        }
+
+    }
 
     public <S extends Ruolo> S save(S ruolo){
         return repository.save(ruolo);
@@ -58,5 +74,4 @@ public class RuoloService {
     public void deleteAll(){
         repository.deleteAll();
     }
-
 }
