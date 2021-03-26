@@ -1,6 +1,8 @@
 package com.zarconeg.carRentalRestApi.exception.auto;
 
-public class AutoIntegrityException extends Throwable {
+import com.zarconeg.carRentalRestApi.exception.RestCustomException;
+
+public class AutoIntegrityException extends RestCustomException {
     public AutoIntegrityException(){
         super("Errore di integrità dei dati della tabella Auto");
     }
