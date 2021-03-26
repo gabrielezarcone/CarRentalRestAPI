@@ -102,4 +102,13 @@ public class AutoController {
             throw new AutoNotFoundException();
         }
     }
+    
+    // DELETE /api/auto/
+    // Cancella tutte le auto del parco auto
+    @DeleteMapping(value = "/")
+    public ResponseEntity<String> deleteAllAuto() {
+        LOG.warn("Elimino  tutte le auto");
+        autoService.deleteAll();
+        return new ResponseEntity<>("Eliminati tutte le auto",HttpStatus.OK);
+    }
 }
