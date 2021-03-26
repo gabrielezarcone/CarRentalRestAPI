@@ -70,21 +70,21 @@
 ## Ruolo  
 #### _TO DO_
 
-`POST` `/ruolos` _Crea un nuovo ruolo_
+`POST` `/ruolo` _Crea un nuovo ruolo_
 
-`POST` `/ruolos/list` _Crea nuovi ruoli da una lista_
+`POST` `/ruolo/list` _Crea nuovi ruoli da una lista_
 
-`GET` `/ruolos/{id}` _Restituisce il ruolo con l'id specificato_
+`GET` `/ruolo/{id}` _Restituisce il ruolo con l'id specificato_
 
-`GET` `/ruolos` _Restituisce la lista di tutti i ruoli_
+`GET` `/ruolo` _Restituisce la lista di tutti i ruoli_
 
-`GET` `/ruolos/count` _Restituisce il numero di ruoli_
+`GET` `/ruolo/count` _Restituisce il numero di ruoli_
 
-`PUT` `/ruolos/{id}` _Modifica un ruolo_
+`PUT` `/ruolo/{id}` _Modifica un ruolo_
 
-`DELETE` `/ruolos` _Elimina tutti i ruoli_
+`DELETE` `/ruolo` _Elimina tutti i ruoli_
 
-`DELETE` `/ruolos/{id}` _Elimina un ruolo_
+`DELETE` `/ruolo/{id}` _Elimina un ruolo_
 
-`DELETE` `/ruolos/list` _Elimina i ruoli da una lista_
+`DELETE` `/ruolo/list` _Elimina i ruoli da una lista_
 
