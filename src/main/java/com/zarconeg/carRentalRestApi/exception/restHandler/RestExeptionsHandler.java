@@ -1,5 +1,6 @@
 package com.zarconeg.carRentalRestApi.exception.restHandler;
 
+import com.zarconeg.carRentalRestApi.exception.auto.AutoNotFoundException;
 import com.zarconeg.carRentalRestApi.exception.user.UserIntegrityException;
 import com.zarconeg.carRentalRestApi.exception.user.UserNotFoundException;
 import org.slf4j.Logger;
@@ -31,6 +32,17 @@ public class RestExeptionsHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(UserNotFoundException.class)
     public final ResponseEntity<ErrorResponse> userNotFound(Exception ex){
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setStatus(HttpStatus.NOT_FOUND);
+        errorResponse.setMessage(ex.getMessage());
+        // ----------------------------------------
+        LOG.error(errorResponse.getMessage());
+        // ----------------------------------------
+        return new ResponseEntity<>(errorResponse, errorResponse.getStatus());
+    }
+
+    @ExceptionHandler(AutoNotFoundException.class)
+    public final ResponseEntity<ErrorResponse> autoNotFound(Exception ex){
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setStatus(HttpStatus.NOT_FOUND);
         errorResponse.setMessage(ex.getMessage());
