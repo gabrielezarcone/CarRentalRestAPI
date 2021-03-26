@@ -86,4 +86,20 @@ public class AutoController {
         // --------------------------
         return new ResponseEntity<>(headers, HttpStatus.OK);
     }
+
+    // DELETE /api/auto/{id}
+    // Cancella auto in base all'id
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> deleteAutoById(@PathVariable long id) throws AutoNotFoundException {
+        LOG.info("Recupero auto con id: {} per eliminazione", id);
+        Optional<Auto> auto = autoService.findById(id);
+        if (auto.isPresent()){
+            LOG.info("Elimino auto: {}", auto.get());
+            autoService.delete(auto.get());
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        else {
+            throw new AutoNotFoundException();
+        }
+    }
 }
