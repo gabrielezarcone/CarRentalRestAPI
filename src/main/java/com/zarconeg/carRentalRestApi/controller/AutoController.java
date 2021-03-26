@@ -1,7 +1,6 @@
 package com.zarconeg.carRentalRestApi.controller;
 
 import com.zarconeg.carRentalRestApi.domain.Auto;
-import com.zarconeg.carRentalRestApi.domain.Auto;
 import com.zarconeg.carRentalRestApi.exception.auto.AutoNotFoundException;
 import com.zarconeg.carRentalRestApi.exception.auto.AutoIntegrityException;
 import com.zarconeg.carRentalRestApi.service.AutoService;
@@ -68,5 +67,23 @@ public class AutoController {
         }
         headers.setLocation(ucBuilder.path("/api/auto/{id}").buildAndExpand(newAuto.getId()).toUri());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+    }
+
+    // PUT /api/auto/{id}
+    // Aggiorna l'auto sostituendo tutte le informazioni con quelle dell'auto ricevuta
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<String> updateAuto(
+            @PathVariable long id,
+            @RequestBody Auto updatedAuto,
+            UriComponentsBuilder ucBuilder
+    ) throws AutoNotFoundException {
+        LOG.info("Recupero auto con id: {} per aggiornarla", id);
+        autoService.update(id, updatedAuto);
+        LOG.info("Aggiornata auto: {}", updatedAuto);
+        // --------------------------
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/api/auto/{id}").buildAndExpand(updatedAuto.getId()).toUri());
+        // --------------------------
+        return new ResponseEntity<>(headers, HttpStatus.OK);
     }
 }
