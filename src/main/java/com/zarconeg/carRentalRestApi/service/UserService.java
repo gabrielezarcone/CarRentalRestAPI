@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,7 @@ import java.util.Optional;
 public class UserService{
     
     @Autowired private UserRepository repository;
+    @Autowired private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public <S extends User> S save(S user){
         return repository.save(user);
@@ -31,7 +33,9 @@ public class UserService{
             user.setUsername(updatedUser.getUsername());
             user.setName(updatedUser.getName());
             user.setSurname(updatedUser.getSurname());
-            user.setPassword(updatedUser.getPassword());
+            if (!user.getPassword().equals(updatedUser.getPassword())){
+                user.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
+            }
             user.setEmail(updatedUser.getEmail());
             user.setBirthDate(updatedUser.getBirthDate());
             user.setDeleted(updatedUser.isDeleted());
