@@ -25,25 +25,26 @@
 `DELETE` `/users/list` _Elimina utenti da una lista_
 
 ## Auto
+
+`POST` `/auto` _Crea una nuova auto_
+
+`GET` `/auto/{id}` _Restituisce l'auto con l'id specificato_
+
+`GET` `/auto` _Restituisce la lista di tutte le auto_
+
+`GET` `/auto/count` _Restituisce il numero di auto_
+
+`PUT` `/auto/{id}` _Modifica un'auto_
+
+`DELETE` `/auto` _Elimina tutte le auto_
+
+`DELETE` `/auto/{id}` _Elimina un'auto_
+
 #### _TO DO_
 
-`POST` `/autos` _Crea una nuova auto_
+`POST` `/auto/list` _Crea nuove auto da una lista_
 
-`POST` `/autos/list` _Crea nuove auto da una lista_
-
-`GET` `/autos/{id}` _Restituisce l'auto con l'id specificato_
-
-`GET` `/autos` _Restituisce la lista di tutte le auto_
-
-`GET` `/autos/count` _Restituisce il numero di auto_
-
-`PUT` `/autos/{id}` _Modifica un'auto_
-
-`DELETE` `/autos` _Elimina tutte le auto_
-
-`DELETE` `/autos/{id}` _Elimina un'auto_
-
-`DELETE` `/autos/list` _Elimina le auto da una lista_
+`DELETE` `/auto/list` _Elimina le auto da una lista_
 
 ## Prenotazione
 #### _TO DO_
