@@ -1,5 +1,6 @@
 package com.zarconeg.carRentalRestApi.exception.restHandler;
 
+import com.zarconeg.carRentalRestApi.exception.auto.AutoIntegrityException;
 import com.zarconeg.carRentalRestApi.exception.auto.AutoNotFoundException;
 import com.zarconeg.carRentalRestApi.exception.user.UserIntegrityException;
 import com.zarconeg.carRentalRestApi.exception.user.UserNotFoundException;
@@ -50,6 +51,17 @@ public class RestExeptionsHandler extends ResponseEntityExceptionHandler {
         LOG.error(errorResponse.getMessage());
         // ----------------------------------------
         return new ResponseEntity<>(errorResponse, errorResponse.getStatus());
+    }
+
+    @ExceptionHandler(AutoIntegrityException.class)
+    public final ResponseEntity<ErrorResponse> autoIntegrity(Exception ex){
+        ErrorResponse error = new ErrorResponse();
+        error.setMessage(ex.getMessage());
+        error.setStatus(HttpStatus.BAD_REQUEST);
+        // ----------------------------------------
+        LOG.error(error.getMessage());
+        // ----------------------------------------
+        return new ResponseEntity<>(error, new HttpHeaders(), error.getStatus());
     }
 
 }
