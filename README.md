@@ -47,11 +47,8 @@
 `DELETE` `/auto/list` _Elimina le auto da una lista_
 
 ## Prenotazione
-#### _TO DO_
 
 `POST` `/prenotazione` _Crea una nuova prenotazione_
-
-`POST` `/prenotazione/list` _Crea nuove prenotazioni da una lista_
 
 `GET` `/prenotazione/{id}` _Restituisce la prenotazione con l'id specificato_
 
@@ -64,6 +61,11 @@
 `DELETE` `/prenotazione` _Elimina tutte le prenotazioni_
 
 `DELETE` `/prenotazione/{id}` _Elimina una prenotazione_
+
+
+#### _TO DO_
+
+`POST` `/prenotazione/list` _Crea nuove prenotazioni da una lista_
 
 `DELETE` `/prenotazione/list` _Elimina le prenotazioni da una lista_
 
