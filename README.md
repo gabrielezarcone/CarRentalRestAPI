@@ -25,11 +25,8 @@
 `DELETE` `/users/list` _Elimina utenti da una lista_
 
 ## Auto
-#### _TO DO_
 
 `POST` `/auto` _Crea una nuova auto_
-
-`POST` `/auto/list` _Crea nuove auto da una lista_
 
 `GET` `/auto/{id}` _Restituisce l'auto con l'id specificato_
 
@@ -42,6 +39,10 @@
 `DELETE` `/auto` _Elimina tutte le auto_
 
 `DELETE` `/auto/{id}` _Elimina un'auto_
+
+#### _TO DO_
+
+`POST` `/auto/list` _Crea nuove auto da una lista_
 
 `DELETE` `/auto/list` _Elimina le auto da una lista_
 
