@@ -2,6 +2,7 @@ package com.zarconeg.carRentalRestApi.exception.restHandler;
 
 import com.zarconeg.carRentalRestApi.exception.auto.AutoIntegrityException;
 import com.zarconeg.carRentalRestApi.exception.auto.AutoNotFoundException;
+import com.zarconeg.carRentalRestApi.exception.prenotazione.PrenotazioneNotFoundException;
 import com.zarconeg.carRentalRestApi.exception.ruolo.RuoloIntegrityException;
 import com.zarconeg.carRentalRestApi.exception.ruolo.RuoloNotFoundException;
 import com.zarconeg.carRentalRestApi.exception.user.UserIntegrityException;
@@ -92,5 +93,18 @@ public class RestExeptionsHandler extends ResponseEntityExceptionHandler {
         LOG.error(error.getMessage());
         // ----------------------------------------
         return new ResponseEntity<>(error, new HttpHeaders(), error.getStatus());
+    }
+
+    // Prenotazione --------------------------------------------------------------------------------------
+
+    @ExceptionHandler(PrenotazioneNotFoundException.class)
+    public final ResponseEntity<ErrorResponse> prenotazioneNotFound(Exception ex){
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setStatus(HttpStatus.NOT_FOUND);
+        errorResponse.setMessage(ex.getMessage());
+        // ----------------------------------------
+        LOG.error(errorResponse.getMessage());
+        // ----------------------------------------
+        return new ResponseEntity<>(errorResponse, errorResponse.getStatus());
     }
 }
