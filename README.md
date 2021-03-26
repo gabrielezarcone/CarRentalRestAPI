@@ -68,11 +68,9 @@
 `DELETE` `/prenotaziones/list` _Elimina le prenotazioni da una lista_
 
 ## Ruolo  
-#### _TO DO_
 
 `POST` `/ruolo` _Crea un nuovo ruolo_
 
-`POST` `/ruolo/list` _Crea nuovi ruoli da una lista_
 
 `GET` `/ruolo/{id}` _Restituisce il ruolo con l'id specificato_
 
@@ -86,5 +84,8 @@
 
 `DELETE` `/ruolo/{id}` _Elimina un ruolo_
 
-`DELETE` `/ruolo/list` _Elimina i ruoli da una lista_
+#### _TO DO_
 
+`POST` `/ruolo/list` _Crea nuovi ruoli da una lista_
+
+`DELETE` `/ruolo/list` _Elimina i ruoli da una lista_
