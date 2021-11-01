@@ -1,4 +1,15 @@
 # REST Api CarRental
+Rest API microservice developed with Spring Boot. Used by [CarRentalAngular project](https://github.com/gabrielezarcone/CarRentalAngular)
+
+This project is the 4th and last step of a Java web applications technologies training. Starting from zero every time I've developed 4 times the same project specifications.
+
+Every step of the training was intended to be based on a different technology stack thus obtaining acquaintance with diverse Java web application scenarios.
+
+The four technology stack used were the following:
+* [JSP/Servlet](https://github.com/gabrielezarcone/CarRental-JavaEE)
+* [SpringMVC](https://github.com/gabrielezarcone/CarRentalSpringMvc)
+* [Front end with Angular](https://github.com/gabrielezarcone/CarRentalAngular)
+* [API with Spring Boot](https://github.com/gabrielezarcone/CarRentalRestAPI)
 
 ###### ENDPOINTS
 
